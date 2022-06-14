@@ -191,7 +191,7 @@ class AuthService {
   }
 
   static async deleteUsers({ id }) {
-    const getUsers = await usersRepository.getCarsById({ id });
+    const getUsers = await usersRepository.getUsersById({ id });
     if (getUsers.id == id) {
 
       const deletedUsers = await usersRepository.deleteUsers({
