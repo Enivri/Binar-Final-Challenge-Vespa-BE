@@ -23,8 +23,8 @@ const middleware = require("./middlewares/auth");
 // Define Routes
 // Auth
 app.get("/v1/users", middleware.authenticate, authController.getCurrentUsers);
-app.get("/v1/users/:id", middleware.authenticate, authController.getUsersById);
 app.get("/v1/users/all", authController.getAllUsers);
+app.get("/v1/users/:id", middleware.authenticate, authController.getUsersById);
 app.post("/v1/register", upload.single("picture"), authController.register);
 app.post("/v1/login", authController.login);
 app.post("/v1/login-google", authController.loginGoogle);
