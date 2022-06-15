@@ -44,6 +44,12 @@ class productRepository {
         return deletedProduct;
     }
 
+    static async getProductByUserId({ id }) {
+        const getProduct = await product.findAll({ where: { user_id: id } });
+
+        return getProduct;
+    }
+
 }
 
 module.exports = productRepository;
