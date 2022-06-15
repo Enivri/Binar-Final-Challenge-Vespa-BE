@@ -144,6 +144,45 @@ class productService {
         }
     }
 
+    static async deleteProductById({ id, user_id }) {
+        try {
+            const getProduct = await productRepository.getProductById({ id });
+
+            if (getProduct.user_id == user_id) {
+                const deletedProduct = await productRepository.deleteProductById({
+                    id,
+                });
+
+                return {
+                    status: true,
+                    status_code: 200,
+                    message: "Product deleted successfully",
+                    data: {
+                        deleted_product: deletedProduct,
+                    },
+                };
+            } else {
+                return {
+                    status: true,
+                    status_code: 401,
+                    message: "Resource Unauthorized",
+                    data: {
+                        deleted_post: null,
+                    },
+                };
+            }
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
 }
 
 module.exports = productService;
