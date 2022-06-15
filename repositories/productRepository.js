@@ -38,6 +38,11 @@ class productRepository {
         return updatedProduct;
     }
 
+    static async deleteProductById({ id }) {
+        const deletedProduct = await product.destroy({ where: { id } });
+
+        return deletedProduct;
+    }
 
 }
 

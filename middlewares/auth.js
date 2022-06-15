@@ -36,7 +36,7 @@ const authenticate = async (req, res, next) => {
 const seller = async (req, res, next) => {
     const getRole = req.user.role
 
-    if (getRole === "Seller") {
+    if (getRole === "seller") {
         next()
         return
     }
