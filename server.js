@@ -15,7 +15,7 @@ app.use(cors());
 
 // Import Controllers
 const authController = require("./controllers/authController");
-
+const productController = require("./controllers/productController");
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -31,8 +31,8 @@ app.post("/v1/login-google", authController.loginGoogle);
 app.put("/v1/users/:id", middleware.authenticate, authController.updateUsers);
 app.delete("/v1/users/:id", middleware.authenticate, authController.deleteUsers);
 
-// Posts
-
+// Products
+app.post("/v1/product", middleware.authenticate, upload.single("picture"), productController.create);
 
 // API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
