@@ -183,6 +183,32 @@ class productService {
         }
     }
 
+    static async getProductByUserId({ id }) {
+        try {
+            const getProduct = await productRepository.getProductByUserId({
+                id,
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success",
+                data: {
+                    posts: getProduct,
+                },
+            };
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
 }
 
 module.exports = productService;

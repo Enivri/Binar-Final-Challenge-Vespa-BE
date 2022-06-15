@@ -63,4 +63,19 @@ const deleteProductById = async (req, res, next) => {
     });
 };
 
-module.exports = { create, updateProductById, deleteProductById };
+const getProductByUserId = async (req, res, next) => {
+    const { id } = req.params;
+
+    const { status, status_code, message, data } =
+        await productService.getProductByUserId({
+            id,
+        });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
+module.exports = { create, updateProductById, deleteProductById, getProductByUserId };
