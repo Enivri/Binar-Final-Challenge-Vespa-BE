@@ -99,6 +99,51 @@ class productService {
         }
     }
 
+    static async updateProductById({ id, user_id, name, price, category, description, picture, sold }) {
+        try {
+            const getProduct = await productRepository.getProductById({ id });
+
+            if (getProduct.user_id == user_id) {
+                const updatedPost = await productRepository.updateProductById({
+                    id,
+                    name,
+                    price,
+                    category,
+                    description,
+                    picture,
+                    sold,
+                });
+
+                return {
+                    status: true,
+                    status_code: 200,
+                    message: "Product updated successfully",
+                    data: {
+                        updated_post: updatedPost,
+                    },
+                };
+            } else {
+                return {
+                    status: true,
+                    status_code: 401,
+                    message: "Resource Unauthorized",
+                    data: {
+                        updated_post: null,
+                    },
+                };
+            }
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
 }
 
 module.exports = productService;

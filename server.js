@@ -33,6 +33,7 @@ app.delete("/v1/users/:id", middleware.authenticate, authController.deleteUsers)
 
 // Products
 app.post("/v1/product", middleware.authenticate, upload.single("picture"), productController.create);
+app.put("/v1/product/:id", middleware.authenticate, upload.single("picture"), productController.updateProductById);
 
 // API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

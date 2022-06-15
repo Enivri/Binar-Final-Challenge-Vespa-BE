@@ -16,6 +16,29 @@ class productRepository {
         return createdProduct;
     }
 
+    static async getProductById({ id }) {
+        const getProduct = await product.findOne({ where: { id } });
+
+        return getProduct;
+    }
+
+    static async updateProductById({ id, name, price, category, description, picture, sold }) {
+        const updatedProduct = await product.update(
+            {
+                name,
+                price,
+                category,
+                description,
+                picture,
+                sold,
+            },
+            { where: { id } }
+        );
+
+        return updatedProduct;
+    }
+
+
 }
 
 module.exports = productRepository;
