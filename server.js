@@ -32,7 +32,8 @@ app.put("/v1/users/:id", middleware.authenticate, authController.updateUsers);
 app.delete("/v1/users/:id", middleware.authenticate, authController.deleteUsers);
 
 // Products
-app.get("/v1/product/:id", middleware.authenticate, productController.getProductByUserId);
+app.get("/v1/product/user/:id", middleware.authenticate, productController.getProductByUserId);
+app.get("/v1/product/:id", middleware.authenticate, productController.getProductById);
 app.post("/v1/product", middleware.authenticate, upload.single("picture"), productController.create);
 app.put("/v1/product/:id", middleware.authenticate, upload.single("picture"), productController.updateProductById);
 app.delete("/v1/product/:id", middleware.authenticate, productController.deleteProductById);
