@@ -2,14 +2,17 @@ const { user, product } = require("../models");
 const { Op } = require("sequelize");
 
 class productRepository {
-    static async create({ user_id, name, price, category, description, picture, sold }) {
+    static async create({ user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
         const createdProduct = product.create({
             user_id,
             name,
             price,
             category,
             description,
-            picture,
+            picture_1,
+            picture_2,
+            picture_3,
+            picture_4,
             sold,
         });
 
@@ -22,14 +25,17 @@ class productRepository {
         return getProduct;
     }
 
-    static async updateProductById({ id, name, price, category, description, picture, sold }) {
+    static async updateProductById({ id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
         const updatedProduct = await product.update(
             {
                 name,
                 price,
                 category,
                 description,
-                picture,
+                picture_1,
+                picture_2,
+                picture_3,
+                picture_4,
                 sold,
             },
             { where: { id } }

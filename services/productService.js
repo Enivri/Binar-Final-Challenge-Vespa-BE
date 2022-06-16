@@ -1,7 +1,7 @@
 const productRepository = require("../repositories/productRepository");
 
 class productService {
-    static async create({ user_id, name, price, category, description, picture, sold }) {
+    static async create({ user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
         try {
             if (!name) {
                 return {
@@ -75,7 +75,10 @@ class productService {
                 price,
                 category,
                 description,
-                picture,
+                picture_1,
+                picture_2,
+                picture_3,
+                picture_4,
                 sold,
             });
 
@@ -99,7 +102,7 @@ class productService {
         }
     }
 
-    static async updateProductById({ id, user_id, name, price, category, description, picture, sold }) {
+    static async updateProductById({ id, user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
         try {
             const getProduct = await productRepository.getProductById({ id });
 
@@ -110,7 +113,10 @@ class productService {
                     price,
                     category,
                     description,
-                    picture,
+                    picture_1,
+                    picture_2,
+                    picture_3,
+                    picture_4,
                     sold,
                 });
 
