@@ -56,6 +56,12 @@ class productRepository {
         return getProduct;
     }
 
+    static async getAllProduct({ sold }) {
+        const getAllProduct = await product.findAll({ where: { sold: false } });
+
+        return getAllProduct;
+    }
+
 }
 
 module.exports = productRepository;

@@ -99,4 +99,18 @@ const getProductByUserId = async (req, res, next) => {
     });
 };
 
-module.exports = { create, updateProductById, deleteProductById, getProductById, getProductByUserId };
+const getAllProduct = async (req, res, next) => {
+    const { sold } = req.query;
+
+    const { status, status_code, message, data } = await productService.getAllProduct({
+        sold
+    });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
+module.exports = { create, updateProductById, deleteProductById, getProductById, getProductByUserId, getAllProduct };

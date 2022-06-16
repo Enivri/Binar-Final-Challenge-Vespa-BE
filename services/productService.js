@@ -241,6 +241,21 @@ class productService {
         }
     }
 
+    static async getAllProduct({ sold }) {
+
+        const getAllProduct = await productRepository.getAllProduct({
+            sold
+        });
+        return {
+            status: true,
+            status_code: 200,
+            message: "get All Product successfully",
+            data: {
+                result: getAllProduct,
+            },
+        };
+    }
+
 }
 
 module.exports = productService;
