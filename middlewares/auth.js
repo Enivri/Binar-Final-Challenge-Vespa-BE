@@ -33,18 +33,5 @@ const authenticate = async (req, res, next) => {
     }
 };
 
-const seller = async (req, res, next) => {
-    const getRole = req.user.role
 
-    if (getRole === "seller") {
-        next()
-        return
-    }
-    res.send({
-        status: false,
-        message: "need seller role to access this",
-        data: null,
-    })
-}
-
-module.exports = { authenticate, seller };
+module.exports = { authenticate };

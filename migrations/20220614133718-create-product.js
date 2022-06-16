@@ -23,7 +23,16 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      picture: {
+      picture_1: {
+        type: Sequelize.STRING
+      },
+      picture_2: {
+        type: Sequelize.STRING
+      },
+      picture_3: {
+        type: Sequelize.STRING
+      },
+      picture_4: {
         type: Sequelize.STRING
       },
       sold: {
