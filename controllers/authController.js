@@ -2,7 +2,7 @@ const authService = require("../services/authService");
 
 
 const register = async (req, res) => {
-  const { name, email, password, town, address, phone, role, picture } = req.body;
+  const { name, email, password, town, address, phone, picture } = req.body;
 
   const { status, status_code, message, data } = await authService.register({
     name,
@@ -12,7 +12,6 @@ const register = async (req, res) => {
     address,
     phone,
     picture: req.uploaded_picture,
-    role,
   });
 
   res.status(status_code).send({
@@ -24,7 +23,7 @@ const register = async (req, res) => {
 
 const updateUsers = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, password, town, address, phone, role, picture } = req.body;
+  const { name, email, password, town, address, phone, picture } = req.body;
 
   const { status, status_code, message, data } = await authService.updateUsers({
     id,
@@ -35,7 +34,6 @@ const updateUsers = async (req, res, next) => {
     address,
     phone,
     picture: req.uploaded_picture,
-    role,
   });
 
   res.status(status_code).send({

@@ -7,7 +7,7 @@ const { JWT } = require("../lib/const");
 const SALT_ROUND = 10;
 
 class AuthService {
-  static async register({ name, email, password, town, address, phone, role, picture }) {
+  static async register({ name, email, password, town, address, phone, picture }) {
     // Payload Validation
     if (!name) {
       return {
@@ -72,7 +72,6 @@ class AuthService {
         address,
         phone,
         picture,
-        role,
       });
 
       return {
@@ -166,7 +165,7 @@ class AuthService {
     }
   }
 
-  static async updateUsers({ id, name, email, password, town, address, phone, role, picture }) {
+  static async updateUsers({ id, name, email, password, town, address, phone, picture }) {
 
     const updatedUsers = await usersRepository.updateUsers({
       id,
@@ -177,7 +176,6 @@ class AuthService {
       address,
       phone,
       picture,
-      role,
     });
 
     return {
