@@ -1,7 +1,7 @@
 const productRepository = require("../repositories/productRepository");
 
 class productService {
-    static async create({ user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
+    static async create({ user_id, name, price, category, description, picture, sold, isPublished  }) {
         try {
             if (!name) {
                 return {
@@ -47,7 +47,7 @@ class productService {
                 };
             }
 
-            // if (!picture) {
+            // if (!picture.length) {
             //     return {
             //         status: false,
             //         status_code: 400,
@@ -69,17 +69,26 @@ class productService {
                 };
             }
 
+            if (!isPublished) {
+                return {
+                    status: false,
+                    status_code: 400,
+                    message: "status isPublished harus diisi",
+                    data: {
+                        registered_user: null,
+                    },
+                };
+            }
+
             const createdProduct = await productRepository.create({
                 user_id,
                 name,
                 price,
                 category,
                 description,
-                picture_1,
-                picture_2,
-                picture_3,
-                picture_4,
+                picture,
                 sold,
+                isPublished
             });
 
             return {
@@ -102,7 +111,7 @@ class productService {
         }
     }
 
-    static async updateProductById({ id, user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
+    static async updateProductById({ id, user_id, name, price, category, description, picture, sold, isPublished  }) {
         try {
             const getProduct = await productRepository.getProductById({ id });
 
@@ -113,11 +122,9 @@ class productService {
                     price,
                     category,
                     description,
-                    picture_1,
-                    picture_2,
-                    picture_3,
-                    picture_4,
+                    picture,
                     sold,
+                    isPublished
                 });
 
                 return {
@@ -189,9 +196,9 @@ class productService {
         }
     }
 
-    static async getProductByUserId({ id }) {
+    static async getProductById({ id }) {
         try {
-            const getProduct = await productRepository.getProductByUserId({
+            const getProduct = await productRepository.getProductById({
                 id,
             });
 
@@ -213,6 +220,49 @@ class productService {
                 },
             };
         }
+    }
+
+    static async getProductByUserId({ id, sold }) {
+        try {
+            const getProduct = await productRepository.getProductByUserId({
+                id,
+                sold
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success",
+                data: {
+                    posts: getProduct,
+                },
+            };
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
+    static async getAllProduct({ sold, category }) {
+
+        const getAllProduct = await productRepository.getAllProduct({
+            sold,
+            category
+        });
+        return {
+            status: true,
+            status_code: 200,
+            message: "get All Product successfully",
+            data: {
+                result: getAllProduct,
+            },
+        };
     }
 
 }

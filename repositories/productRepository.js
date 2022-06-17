@@ -2,18 +2,16 @@ const { user, product } = require("../models");
 const { Op } = require("sequelize");
 
 class productRepository {
-    static async create({ user_id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
+    static async create({ user_id, name, price, category, description, picture, sold, isPublished }) {
         const createdProduct = product.create({
             user_id,
             name,
             price,
             category,
             description,
-            picture_1,
-            picture_2,
-            picture_3,
-            picture_4,
+            picture,
             sold,
+            isPublished
         });
 
         return createdProduct;
@@ -25,18 +23,16 @@ class productRepository {
         return getProduct;
     }
 
-    static async updateProductById({ id, name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold }) {
+    static async updateProductById({ id, name, price, category, description, picture, sold, isPublished }) {
         const updatedProduct = await product.update(
             {
                 name,
                 price,
                 category,
                 description,
-                picture_1,
-                picture_2,
-                picture_3,
-                picture_4,
+                picture,
                 sold,
+                isPublished
             },
             { where: { id } }
         );
@@ -50,10 +46,40 @@ class productRepository {
         return deletedProduct;
     }
 
-    static async getProductByUserId({ id }) {
-        const getProduct = await product.findAll({ where: { user_id: id } });
+    static async getProductByUserId({ id, sold }) {
+        const query = {
+            where: {}
+        }
+
+        if (id) {
+            query.where = { ...query.where, user_id: id }
+        }
+
+        if (sold) {
+            query.where = { ...query.where, sold }
+        }
+
+        const getProduct = await product.findAll(query);
 
         return getProduct;
+    }
+
+    static async getAllProduct({ sold, category }) {
+        const query = {
+            where: {}
+        }
+
+        if (sold) {
+            query.where = { ...query.where, sold }
+        }
+
+        if (category) {
+            query.where = { ...query.where, category }
+        }
+
+        const getAllProduct = await product.findAll(query);
+
+        return getAllProduct;
     }
 
 }
