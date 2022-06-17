@@ -23,19 +23,13 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      picture_1: {
-        type: Sequelize.STRING
-      },
-      picture_2: {
-        type: Sequelize.STRING
-      },
-      picture_3: {
-        type: Sequelize.STRING
-      },
-      picture_4: {
-        type: Sequelize.STRING
+      picture: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       sold: {
+        type: Sequelize.BOOLEAN
+      },
+      isPublished: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {

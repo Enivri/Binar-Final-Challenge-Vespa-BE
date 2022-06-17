@@ -1,7 +1,7 @@
 const productService = require("../services/productService");
 
 const create = async (req, res, next) => {
-    const { name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold } = req.body;
+    const { name, price, category, description, picture, sold, isPublished } = req.body;
 
     const user_id = req.user.id;
 
@@ -11,11 +11,9 @@ const create = async (req, res, next) => {
         price,
         category,
         description,
-        picture_1: req.uploaded_picture,
-        picture_2: req.uploaded_picture,
-        picture_3: req.uploaded_picture,
-        picture_4: req.uploaded_picture,
+        picture: req.uploaded_picture,
         sold,
+        isPublished
     });
 
     res.status(status_code).send({
@@ -27,7 +25,7 @@ const create = async (req, res, next) => {
 
 const updateProductById = async (req, res, next) => {
     const { id } = req.params;
-    const { name, price, category, description, picture_1, picture_2, picture_3, picture_4, sold } = req.body;
+    const { name, price, category, description, picture, sold, isPublished } = req.body;
 
     const user_id = req.user.id;
 
@@ -38,11 +36,9 @@ const updateProductById = async (req, res, next) => {
         price,
         category,
         description,
-        picture_1: req.uploaded_picture,
-        picture_2: req.uploaded_picture,
-        picture_3: req.uploaded_picture,
-        picture_4: req.uploaded_picture,
+        picture: req.uploaded_picture,
         sold,
+        isPublished
     });
 
     res.status(status_code).send({
@@ -86,10 +82,12 @@ const getProductById = async (req, res, next) => {
 
 const getProductByUserId = async (req, res, next) => {
     const { id } = req.params;
+    const { sold } = req.query;
 
     const { status, status_code, message, data } =
         await productService.getProductByUserId({
             id,
+            sold
         });
 
     res.status(status_code).send({
@@ -100,10 +98,11 @@ const getProductByUserId = async (req, res, next) => {
 };
 
 const getAllProduct = async (req, res, next) => {
-    const { sold } = req.query;
+    const { sold, category } = req.query;
 
     const { status, status_code, message, data } = await productService.getAllProduct({
-        sold
+        sold,
+        category
     });
 
     res.status(status_code).send({

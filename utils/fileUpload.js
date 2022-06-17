@@ -13,8 +13,8 @@ const storage = multer.diskStorage({
     cb(null, fileName);
 
     if (!req[`uploaded_${file.fieldname}`])
-      req[`uploaded_${file.fieldname}`] = "";
-    req[`uploaded_${file.fieldname}`] = fileName;
+      req[`uploaded_${file.fieldname}`] = [];
+    req[`uploaded_${file.fieldname}`].push(fileName);
   },
 });
 
