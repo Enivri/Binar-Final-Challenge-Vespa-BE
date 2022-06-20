@@ -249,11 +249,12 @@ class productService {
         }
     }
 
-    static async getAllProduct({ sold, category }) {
+    static async getAllProduct({ sold, category, name }) {
 
         const getAllProduct = await productRepository.getAllProduct({
             sold,
-            category
+            category,
+            name
         });
         return {
             status: true,
