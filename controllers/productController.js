@@ -98,11 +98,12 @@ const getProductByUserId = async (req, res, next) => {
 };
 
 const getAllProduct = async (req, res, next) => {
-    const { sold, category } = req.query;
+    const { sold, category, name } = req.query;
 
     const { status, status_code, message, data } = await productService.getAllProduct({
         sold,
-        category
+        category,
+        name
     });
 
     res.status(status_code).send({
