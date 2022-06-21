@@ -222,11 +222,12 @@ class productService {
         }
     }
 
-    static async getProductByUserId({ id, sold }) {
+    static async getProductByUserId({ id, sold, isPublished }) {
         try {
             const getProduct = await productRepository.getProductByUserId({
                 id,
-                sold
+                sold,
+                isPublished
             });
 
             return {
@@ -249,12 +250,13 @@ class productService {
         }
     }
 
-    static async getAllProduct({ sold, category, name }) {
+    static async getAllProduct({ sold, category, name, isPublished }) {
 
         const getAllProduct = await productRepository.getAllProduct({
             sold,
             category,
-            name
+            name,
+            isPublished
         });
         return {
             status: true,
