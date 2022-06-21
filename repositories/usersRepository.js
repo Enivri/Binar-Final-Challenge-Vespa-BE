@@ -1,13 +1,13 @@
 const { user } = require("../models");
 
-class UsersRepository {
+class userRepository {
   static async getByEmail({ email }) {
     const getUser = await user.findOne({ where: { email: email } });
 
     return getUser;
   }
 
-  static async create({ name, email, password, town, address, phone, picture, role }) {
+  static async create({ name, email, password, town, address, phone, picture }) {
     const createdUser = await user.create({
       name,
       email,
@@ -16,13 +16,12 @@ class UsersRepository {
       address,
       phone,
       picture,
-      role,
     });
 
     return createdUser;
   }
 
-  static async updateUsers({ id, name, email, password, town, address, phone, picture, role }) {
+  static async updateUsers({ id, name, email, password, town, address, phone, picture}) {
     const deleteUsers = await user.update(
       {
         name,
@@ -32,7 +31,6 @@ class UsersRepository {
         address,
         phone,
         picture,
-        role,
       },
       { where: { id } }
     );
@@ -58,11 +56,6 @@ class UsersRepository {
     return getAllUsers;
   }
 
-  // static async getPostsByID({ id }) {
-  //   const getPosts = await Post.findAll({ where: { user_id: id } });
-
-  //   return getPosts;
-  // }
 }
 
-module.exports = UsersRepository;
+module.exports = userRepository;

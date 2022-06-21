@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_id: {
+        type: Sequelize.STRING
+      },
       name: {
         type: Sequelize.STRING
       },
@@ -21,9 +24,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       picture: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       sold: {
+        type: Sequelize.BOOLEAN
+      },
+      isPublished: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
