@@ -16,6 +16,7 @@ app.use(cors());
 // Import Controllers
 const authController = require("./controllers/authController");
 const productController = require("./controllers/productController");
+const transactionController = require("./controllers/transactionController");
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -38,6 +39,10 @@ app.get("/v1/product/:id", middleware.authenticate, productController.getProduct
 app.post("/v1/product", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.create);
 app.put("/v1/product/:id", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.updateProductById);
 app.delete("/v1/product/:id", middleware.authenticate, productController.deleteProductById);
+
+// Transaction
+app.get("/v1/transaction/user", middleware.authenticate, transactionController.getTransactionByUserId);
+app.post("/v1/transaction", middleware.authenticate, transactionController.createTransaction);
 
 // API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
