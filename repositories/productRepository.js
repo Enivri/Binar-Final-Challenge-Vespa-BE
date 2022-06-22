@@ -46,7 +46,7 @@ class productRepository {
         return deletedProduct;
     }
 
-    static async getProductByUserId({ id, sold }) {
+    static async getProductByUserId({ id, sold, isPublished }) {
         const query = {
             where: {}
         }
@@ -59,12 +59,16 @@ class productRepository {
             query.where = { ...query.where, sold }
         }
 
+        if (isPublished) {
+            query.where = { ...query.where, isPublished }
+        }
+
         const getProduct = await product.findAll(query);
 
         return getProduct;
     }
 
-    static async getAllProduct({ sold, category, name }) {
+    static async getAllProduct({ sold, category, name, isPublished }) {
         const query = {
             where: {},
             like: {}
@@ -76,6 +80,10 @@ class productRepository {
 
         if (category) {
             query.where = { ...query.where, category }
+        }
+        
+        if (isPublished) {
+            query.where = { ...query.where, isPublished }
         }
 
         if (name) {

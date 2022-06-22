@@ -1,6 +1,6 @@
 const { user } = require("../models");
 
-class UsersRepository {
+class userRepository {
   static async getByEmail({ email }) {
     const getUser = await user.findOne({ where: { email: email } });
 
@@ -56,11 +56,6 @@ class UsersRepository {
     return getAllUsers;
   }
 
-  // static async getPostsByID({ id }) {
-  //   const getPosts = await Post.findAll({ where: { user_id: id } });
-
-  //   return getPosts;
-  // }
 }
 
-module.exports = UsersRepository;
+module.exports = userRepository;
