@@ -16,7 +16,6 @@ app.use(cors());
 // Import Controllers
 const authController = require("./controllers/authController");
 const productController = require("./controllers/productController");
-const whistlistController = require("./controllers/whistlistController");
 
 // Import Midleware
 const middleware = require("./middlewares/auth");
@@ -39,10 +38,6 @@ app.get("/v1/product/:id", middleware.authenticate, productController.getProduct
 app.post("/v1/product", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.create);
 app.put("/v1/product/:id", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.updateProductById);
 app.delete("/v1/product/:id", middleware.authenticate, productController.deleteProductById);
-
-//Whistlist
-app.get("/v1/whistlist/user", middleware.authenticate, whistlistController.getWhistlistByUserId);
-app.post("/v1/whistlist", middleware.authenticate, whistlistController.create);
 
 // API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
