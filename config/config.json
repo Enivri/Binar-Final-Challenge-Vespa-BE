@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "postgres",
-    "password": "irvine123",
+    "password": "Athia272",
     "database": "Final_Challenge",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "irvine123",
+    "password": "Athia272",
     "database": "Final_Challenge",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "irvine123",
+    "password": "Athia272",
     "database": "Final_Challenge",
     "host": "127.0.0.1",
     "dialect": "postgres"
