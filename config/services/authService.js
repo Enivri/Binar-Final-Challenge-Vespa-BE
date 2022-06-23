@@ -167,12 +167,11 @@ class AuthService {
 
   static async updateUsers({ id, name, email, password, town, address, phone, picture }) {
 
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUND);
     const updatedUsers = await usersRepository.updateUsers({
       id,
       name,
       email,
-      password: hashedPassword,
+      password,
       town,
       address,
       phone,
