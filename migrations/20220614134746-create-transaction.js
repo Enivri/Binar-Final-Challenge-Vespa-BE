@@ -11,20 +11,27 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
-      product_id: {
+      owner_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "products",
           key: "id"
         }
       },
-      originalPrice: {
-        type: Sequelize.INTEGER
+      product_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "users",
+          key: "id"
+        }
       },
       requestedPrice: {
         type: Sequelize.INTEGER
       },
       accepted: {
+        type: Sequelize.BOOLEAN
+      },
+      rejected: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {

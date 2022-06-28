@@ -70,8 +70,7 @@ class productRepository {
 
     static async getAllProduct({ sold, category, name, isPublished }) {
         const query = {
-            where: {},
-            like: {}
+            where: {}
         }
 
         if (sold) {
@@ -81,13 +80,13 @@ class productRepository {
         if (category) {
             query.where = { ...query.where, category }
         }
-        
+
         if (isPublished) {
             query.where = { ...query.where, isPublished }
         }
 
         if (name) {
-            query.like = { ...query.like, name }
+            query.where = { ...query.where, name: { [Op.like]: '%' + name + '%' } }
         }
 
         const getAllProduct = await product.findAll(query);
