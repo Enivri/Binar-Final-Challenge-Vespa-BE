@@ -29,20 +29,20 @@ app.get("/v1/users/:id", middleware.authenticate, authController.getUsersById);
 app.post("/v1/register", upload.single("picture"), authController.register);
 app.post("/v1/login", authController.login);
 app.post("/v1/login-google", authController.loginGoogle);
-app.put("/v1/updateUser/:id", middleware.authenticate, upload.single("picture"), authController.updateUsers);
+app.put("/v1/updateUsers/:id", middleware.authenticate, upload.single("picture"), authController.updateUsers);
 app.delete("/v1/deleteUsers/:id", middleware.authenticate, authController.deleteUsers);
 
 // Products
 app.get("/v1/product/all", productController.getAllProduct);
-app.get("/v1/product/user/:id", middleware.authenticate, productController.getProductByUserId);
+app.get("/v1/product/users/:id", middleware.authenticate, productController.getProductByUserId);
 app.get("/v1/product/:id", middleware.authenticate, productController.getProductById);
 app.post("/v1/product", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.create);
 app.put("/v1/updateProduct/:id", middleware.authenticate, upload.fields([{ name: "picture" }]), productController.updateProductById);
 app.delete("/v1/deleteProduct/:id", middleware.authenticate, productController.deleteProductById);
 
 // Transaction
-app.get("/v1/transaction/user/:id", middleware.authenticate, transactionController.getTransactionByUserId);
-app.get("/v1/transaction/owner/:id", middleware.authenticate, transactionController.getTransactionByOwnerId);
+app.get("/v1/transaction/users/:id", middleware.authenticate, transactionController.getTransactionByUserId);
+app.get("/v1/transaction/owners/:id", middleware.authenticate, transactionController.getTransactionByOwnerId);
 app.post("/v1/transaction", middleware.authenticate, transactionController.createTransaction);
 app.put("/v1/transaction/:id", middleware.authenticate, transactionController.updateTransactionById);
 
