@@ -29,7 +29,7 @@ app.get("/v1/users/:id", middleware.authenticate, authController.getUsersById);
 app.post("/v1/register", upload.single("picture"), authController.register);
 app.post("/v1/login", authController.login);
 app.post("/v1/login-google", authController.loginGoogle);
-app.put("/v1/updateUser/:id", middleware.authenticate, authController.updateUsers);
+app.put("/v1/updateUser/:id", middleware.authenticate, upload.single("picture"), authController.updateUsers);
 app.delete("/v1/deleteUsers/:id", middleware.authenticate, authController.deleteUsers);
 
 // Products

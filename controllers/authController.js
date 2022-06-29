@@ -23,17 +23,15 @@ const register = async (req, res) => {
 
 const updateUsers = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, password, town, address, phone, picture } = req.body;
+  const { name, town, address, phone, picture } = req.body;
 
   const { status, status_code, message, data } = await authService.updateUsers({
     id,
     name,
-    email,
-    password,
     town,
     address,
     phone,
-    picture: req.uploaded_picture,
+    picture: req.uploaded_picture[0],
   });
 
   res.status(status_code).send({

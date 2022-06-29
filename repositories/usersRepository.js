@@ -21,12 +21,10 @@ class userRepository {
     return createdUser;
   }
 
-  static async updateUsers({ id, name, email, password, town, address, phone, picture}) {
+  static async updateUsers({ id, name, town, address, phone, picture}) {
     const deleteUsers = await user.update(
       {
         name,
-        email,
-        password,
         town,
         address,
         phone,
