@@ -49,8 +49,6 @@ app.put("/v1/transaction/:id", middleware.authenticate, transactionController.up
 // API Documentation
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Public File Access
-app.use("/public/files", express.static(path.join(__dirname, "/storages")));
 
 app.listen(process.env.PORT || 2000, () => {
   console.log(

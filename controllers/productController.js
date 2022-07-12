@@ -11,7 +11,7 @@ const create = async (req, res, next) => {
         price,
         category,
         description,
-        picture: req.uploaded_picture,
+        picture: req.files,
         sold,
         isPublished
     });
@@ -36,7 +36,7 @@ const updateProductById = async (req, res, next) => {
         price,
         category,
         description,
-        picture: req.uploaded_picture,
+        picture: req.files,
         sold,
         isPublished
     });

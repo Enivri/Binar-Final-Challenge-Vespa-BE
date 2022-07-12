@@ -1,4 +1,5 @@
 const productRepository = require("../repositories/productRepository");
+const cloudinary = require("../cloudinary/cloudinary");
 
 class productService {
     static async create({ user_id, name, price, category, description, picture, sold, isPublished  }) {
@@ -80,13 +81,22 @@ class productService {
                 };
             }
 
+            const images = [];
+
+            await Promise.all(picture.picture.map(async (img) => {
+                const fileBase64 = img.buffer.toString("base64");
+                const file = `data:${img.mimetype};base64,${fileBase64}`;
+                const cloudinaryImage = await cloudinary.uploader.upload(file);
+                images.push(cloudinaryImage.url);
+            }))
+
             const createdProduct = await productRepository.create({
                 user_id,
                 name,
                 price,
                 category,
                 description,
-                picture,
+                picture: images,
                 sold,
                 isPublished
             });
@@ -116,13 +126,23 @@ class productService {
             const getProduct = await productRepository.getProductById({ id });
 
             if (getProduct.user_id == user_id) {
+
+                const images = [];
+
+                await Promise.all(picture.picture.map(async (img) => {
+                    const fileBase64 = img.buffer.toString("base64");
+                    const file = `data:${img.mimetype};base64,${fileBase64}`;
+                    const cloudinaryImage = await cloudinary.uploader.upload(file);
+                    images.push(cloudinaryImage.url);
+                }))
+
                 const updatedPost = await productRepository.updateProductById({
                     id,
                     name,
                     price,
                     category,
                     description,
-                    picture,
+                    picture: images,
                     sold,
                     isPublished
                 });

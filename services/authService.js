@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const { JWT } = require("../lib/const");
+const cloudinary = require("../cloudinary/cloudinary");
 
 const SALT_ROUND = 10;
 
@@ -64,6 +65,10 @@ class AuthService {
       };
     } else {
       const hashedPassword = await bcrypt.hash(password, SALT_ROUND);
+      const fileBase64 = picture.buffer.toString("base64");
+      const file = `data:${picture.mimetype};base64,${fileBase64}`;
+      const cloudinaryImage = await cloudinary.uploader.upload(file)
+
       const createdUser = await usersRepository.create({
         name,
         email,
@@ -71,7 +76,7 @@ class AuthService {
         town,
         address,
         phone,
-        picture,
+        picture: cloudinaryImage.url,
       });
 
       return {
@@ -167,13 +172,16 @@ class AuthService {
 
   static async updateUsers({ id, name, town, address, phone, picture }) {
 
+    const fileBase64 = picture.buffer.toString("base64");
+    const file = `data:${picture.mimetype};base64,${fileBase64}`;
+    const cloudinaryImage = await cloudinary.uploader.upload(file);
     const updatedUsers = await usersRepository.updateUsers({
       id,
       name,
       town,
       address,
       phone,
-      picture,
+      picture: cloudinaryImage.url,
     });
 
     return {
