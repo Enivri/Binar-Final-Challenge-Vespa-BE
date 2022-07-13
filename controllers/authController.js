@@ -3,16 +3,12 @@ const authService = require("../services/authService");
 
 const register = async (req, res) => {
   try {
-    const { name, email, password, town, address, phone, picture } = req.body;
+    const { name, email, password } = req.body;
 
     const { status, status_code, message, data } = await authService.register({
       name,
       email,
-      password,
-      town,
-      address,
-      phone,
-      picture: req.file,
+      password
     });
 
     res.status(status_code).send({

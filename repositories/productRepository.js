@@ -48,7 +48,11 @@ class productRepository {
 
     static async getProductByUserId({ id, sold, isPublished }) {
         const query = {
-            where: {}
+            where: {},
+            include: [{
+                model: user,
+                attributes: ["picture", "name", "town"]
+            }]
         }
 
         if (id) {

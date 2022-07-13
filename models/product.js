@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      product.belongsTo(models.user, {
+        foreignKey: 'user_id'
+      })
     }
   }
   product.init({

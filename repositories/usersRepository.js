@@ -7,21 +7,17 @@ class userRepository {
     return getUser;
   }
 
-  static async create({ name, email, password, town, address, phone, picture }) {
+  static async create({ name, email, password }) {
     const createdUser = await user.create({
       name,
       email,
-      password,
-      town,
-      address,
-      phone,
-      picture,
+      password
     });
 
     return createdUser;
   }
 
-  static async updateUsers({ id, name, town, address, phone, picture}) {
+  static async updateUsers({ id, name, town, address, phone, picture }) {
     const deleteUsers = await user.update(
       {
         name,

@@ -8,7 +8,7 @@ const cloudinary = require("../cloudinary/cloudinary");
 const SALT_ROUND = 10;
 
 class AuthService {
-  static async register({ name, email, password, town, address, phone, picture }) {
+  static async register({ name, email, password}) {
     // Payload Validation
     if (!name) {
       return {
@@ -64,19 +64,11 @@ class AuthService {
         },
       };
     } else {
-      const hashedPassword = await bcrypt.hash(password, SALT_ROUND);
-      const fileBase64 = picture.buffer.toString("base64");
-      const file = `data:${picture.mimetype};base64,${fileBase64}`;
-      const cloudinaryImage = await cloudinary.uploader.upload(file)
 
       const createdUser = await usersRepository.create({
         name,
         email,
         password: hashedPassword,
-        town,
-        address,
-        phone,
-        picture: cloudinaryImage.url,
       });
 
       return {
