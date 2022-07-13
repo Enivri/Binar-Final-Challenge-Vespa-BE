@@ -8,7 +8,7 @@ const cloudinary = require("../cloudinary/cloudinary");
 const SALT_ROUND = 10;
 
 class AuthService {
-  static async register({ name, email, password}) {
+  static async register({ name, email, password }) {
     // Payload Validation
     if (!name) {
       return {
@@ -64,6 +64,7 @@ class AuthService {
         },
       };
     } else {
+      const hashedPassword = await bcrypt.hash(password, SALT_ROUND);
 
       const createdUser = await usersRepository.create({
         name,
