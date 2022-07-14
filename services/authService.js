@@ -165,26 +165,47 @@ class AuthService {
 
   static async updateUsers({ id, name, town, address, phone, picture }) {
 
-    const fileBase64 = picture.buffer.toString("base64");
-    const file = `data:${picture.mimetype};base64,${fileBase64}`;
-    const cloudinaryImage = await cloudinary.uploader.upload(file);
-    const updatedUsers = await usersRepository.updateUsers({
-      id,
-      name,
-      town,
-      address,
-      phone,
-      picture: cloudinaryImage.url,
-    });
+    const getUsers = await usersRepository.getUsersById({ id });
+    if (getUsers.id == id) {
 
-    return {
-      status: true,
-      status_code: 200,
-      message: "User updated successfully",
-      data: {
-        updated_Users: updatedUsers,
-      },
-    };
+      let image
+
+      if (picture) {
+        const fileBase64 = picture.buffer.toString("base64");
+        const file = `data:${picture.mimetype};base64,${fileBase64}`;
+        const cloudinaryImage = await cloudinary.uploader.upload(file);
+        image = cloudinaryImage.url
+      } else {
+        image = getUsers.picture
+      }
+
+      const updatedUsers = await usersRepository.updateUsers({
+        id,
+        name,
+        town,
+        address,
+        phone,
+        picture: image,
+      });
+
+      return {
+        status: true,
+        status_code: 200,
+        message: "User updated successfully",
+        data: {
+          updated_Users: updatedUsers,
+        },
+      };
+    } else {
+      return {
+        status: true,
+        status_code: 401,
+        message: "Resource Unauthorized",
+        data: {
+          deleted_Users: null,
+        },
+      };
+    }
   }
 
   static async deleteUsers({ id }) {
