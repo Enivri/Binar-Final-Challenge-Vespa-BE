@@ -23,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     owner_id: DataTypes.INTEGER,
     product_id: DataTypes.INTEGER,
     requestedPrice: DataTypes.INTEGER,
-    accepted: DataTypes.BOOLEAN,
-    rejected: DataTypes.BOOLEAN
+    accepted: DataTypes.ENUM("pending", "waiting", "accept", "reject")
   }, {
     sequelize,
     modelName: 'transaction',

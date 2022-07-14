@@ -1,14 +1,13 @@
 const { transaction, product } = require("../models");
 
 class transactionRepository {
-    static async create({ user_id, owner_id, product_id, requestedPrice, accepted, rejected }) {
+    static async create({ user_id, owner_id, product_id, requestedPrice, accepted }) {
         const createdTransaction = transaction.create({
             user_id,
             owner_id,
             product_id,
             requestedPrice,
-            accepted,
-            rejected
+            accepted   
         });
 
         return createdTransaction;
@@ -20,15 +19,14 @@ class transactionRepository {
         return getTransaction;
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, rejected }) {
+    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted }) {
         const updatedTransaction = await transaction.update(
             {
                 user_id,
                 owner_id,
                 product_id,
                 requestedPrice,
-                accepted,
-                rejected
+                accepted
             },
             { where: { id } }
         );
@@ -36,7 +34,7 @@ class transactionRepository {
         return updatedTransaction;
     }
 
-    static async getTransactionByUserId({ id, accepted, rejected }) {
+    static async getTransactionByUserId({ id, accepted }) {
         const query = {
             where: {},
             include: [{
@@ -53,16 +51,12 @@ class transactionRepository {
             query.where = { ...query.where, accepted }
         }
 
-        if (rejected) {
-            query.where = { ...query.where, rejected }
-        }
-
         const getTransaction = await transaction.findAll(query);
 
         return getTransaction;
     }
 
-    static async getTransactionByOwnerId({ id, accepted, rejected }) {
+    static async getTransactionByOwnerId({ id, accepted }) {
         const query = {
             where: {},
             include: [{
@@ -77,10 +71,6 @@ class transactionRepository {
 
         if (accepted) {
             query.where = { ...query.where, accepted }
-        }
-
-        if (rejected) {
-            query.where = { ...query.where, rejected }
         }
 
         const getTransaction = await transaction.findAll(query);

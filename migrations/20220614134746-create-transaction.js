@@ -29,10 +29,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       accepted: {
-        type: Sequelize.BOOLEAN
-      },
-      rejected: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.ENUM("pending", "waiting", "accept", "reject")
       },
       createdAt: {
         allowNull: false,

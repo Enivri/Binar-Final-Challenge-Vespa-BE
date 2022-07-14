@@ -1,7 +1,7 @@
 const transactionRepository = require("../repositories/transactionRepository");
 
 class transactionService {
-    static async create({ user_id, owner_id, product_id, requestedPrice, accepted, rejected }) {
+    static async create({ user_id, owner_id, product_id, requestedPrice, accepted }) {
         try {
             if (!owner_id) {
                 return {
@@ -36,24 +36,12 @@ class transactionService {
                 };
             }
 
-            if (!rejected) {
-                return {
-                    status: false,
-                    status_code: 400,
-                    message: "rejected harus diisi",
-                    data: {
-                        registered_user: null,
-                    },
-                };
-            }
-
             const createdTransaction = await transactionRepository.create({
                 user_id,
                 owner_id,
                 product_id,
                 requestedPrice,
-                accepted,
-                rejected
+                accepted
             });
 
             return {
@@ -76,7 +64,7 @@ class transactionService {
         }
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, rejected  }) {
+    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted  }) {
         try {
             const getTransaction = await transactionRepository.getTransactionById({ id });
 
@@ -87,8 +75,7 @@ class transactionService {
                     owner_id,
                     product_id,
                     requestedPrice,
-                    accepted,
-                    rejected
+                    accepted
                 });
 
                 return {
@@ -121,12 +108,11 @@ class transactionService {
         }
     }
     
-    static async getTransactionByUserId({ id, accepted, rejected }) {
+    static async getTransactionByUserId({ id, accepted }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByUserId({
                 id,
-                accepted,
-                rejected
+                accepted
             });
 
             return {
@@ -149,12 +135,11 @@ class transactionService {
         }
     }
 
-    static async getTransactionByOwnerId({ id, accepted, rejected }) {
+    static async getTransactionByOwnerId({ id, accepted }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByOwnerId({
                 id,
-                accepted,
-                rejected
+                accepted
             });
 
             return {
