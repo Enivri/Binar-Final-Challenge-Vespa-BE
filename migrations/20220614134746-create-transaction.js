@@ -9,14 +9,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
-      },
-      owner_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "users",
           key: "id"
         }
+      },
+      owner_id: {
+        type: Sequelize.INTEGER,
       },
       product_id: {
         type: Sequelize.INTEGER,
@@ -30,6 +30,9 @@ module.exports = {
       },
       accepted: {
         type: Sequelize.ENUM("pending", "waiting", "accept", "reject")
+      },
+      isOpen: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

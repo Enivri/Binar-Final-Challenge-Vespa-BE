@@ -17,104 +17,169 @@ const register = async (req, res) => {
       data: data,
     })
   } catch (err) {
-    console.log(err)
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
   }
 };
 
 const updateUsers = async (req, res, next) => {
-  const { id } = req.params;
-  const { name, town, address, phone, picture } = req.body;
-  const { status, status_code, message, data } = await authService.updateUsers({
-    id,
-    name,
-    town,
-    address,
-    phone,
-    picture: req.file,
-  });
+  try {
+    const { id } = req.params;
+    const { name, town, address, phone, picture } = req.body;
+    const { status, status_code, message, data } = await authService.updateUsers({
+      id,
+      name,
+      town,
+      address,
+      phone,
+      picture: req.file,
+    });
 
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  })
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    })
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const deleteUsers = async (req, res, next) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const { status, status_code, message, data } = await authService.deleteUsers({
-    id,
-  });
+    const { status, status_code, message, data } = await authService.deleteUsers({
+      id,
+    });
 
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  });
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    });
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const getUsersById = async (req, res, next) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
+    const { status, status_code, message, data } = await authService.getUsersById({
+      id,
+    });
 
-  const { status, status_code, message, data } = await authService.getUsersById({
-    id,
-  });
-
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  });
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    });
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const getAllUsers = async (req, res, next) => {
-  const { status, status_code, message, data } = await authService.getAllUsers({
-  });
+  try {
+    const { status, status_code, message, data } = await authService.getAllUsers({});
 
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  });
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    });
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const { status, status_code, message, data } = await authService.login({
-    email,
-    password,
-  });
+    const { status, status_code, message, data } = await authService.login({
+      email,
+      password,
+    });
 
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  })
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    })
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const getCurrentUsers = async (req, res) => {
-
-  res.status(200).send({
-    status: 200,
-    message: "hi",
-    data: req.user,
-  })
+  try {
+    res.status(200).send({
+      status: 200,
+      message: "hi",
+      data: req.user,
+    })
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 const loginGoogle = async (req, res) => {
-  const { google_credential } = req.body;
+  try {
+    const { google_credential } = req.body;
 
-  const { status, status_code, message, data } = await authService.loginGoogle({
-    google_credential,
-  });
+    const { status, status_code, message, data } = await authService.loginGoogle({
+      google_credential,
+    });
 
-  res.status(status_code).send({
-    status: status,
-    message: message,
-    data: data,
-  });
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    });
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
 };
 
 module.exports = { register, login, getCurrentUsers, loginGoogle, updateUsers, deleteUsers, getUsersById, getAllUsers };

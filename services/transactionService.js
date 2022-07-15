@@ -13,7 +13,7 @@ class transactionService {
                     },
                 };
             }
-            
+
             if (!product_id) {
                 return {
                     status: false,
@@ -57,14 +57,12 @@ class transactionService {
                 status: false,
                 status_code: 500,
                 message: err.message,
-                data: {
-                    registered_user: null,
-                },
+                data: {},
             };
         }
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted  }) {
+    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted }) {
         try {
             const getTransaction = await transactionRepository.getTransactionById({ id });
 
@@ -101,13 +99,11 @@ class transactionService {
                 status: false,
                 status_code: 500,
                 message: err.message,
-                data: {
-                    registered_user: null,
-                },
+                data: {},
             };
         }
     }
-    
+
     static async getTransactionByUserId({ id, accepted }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByUserId({
@@ -128,9 +124,7 @@ class transactionService {
                 status: false,
                 status_code: 500,
                 message: err.message,
-                data: {
-                    registered_user: null,
-                },
+                data: {},
             };
         }
     }

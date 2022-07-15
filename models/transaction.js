@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'product_id'
       })
       transaction.belongsTo(models.user, {
-        foreignKey: 'owner_id'
+        foreignKey: 'user_id'
       })
     }
   }
@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     owner_id: DataTypes.INTEGER,
     product_id: DataTypes.INTEGER,
     requestedPrice: DataTypes.INTEGER,
-    accepted: DataTypes.ENUM("pending", "waiting", "accept", "reject")
+    accepted: DataTypes.ENUM("pending", "waiting", "accept", "reject"),
+    isOpen: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'transaction',

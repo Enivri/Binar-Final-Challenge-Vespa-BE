@@ -313,9 +313,7 @@ class AuthService {
         status: false,
         status_code: 500,
         message: err.message,
-        data: {
-          registered_user: null,
-        },
+        data: {},
       };
     }
   }

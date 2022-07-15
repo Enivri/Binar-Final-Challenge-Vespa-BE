@@ -1,4 +1,4 @@
-const { transaction, product } = require("../models");
+const { transaction, product, user } = require("../models");
 
 class transactionRepository {
     static async create({ user_id, owner_id, product_id, requestedPrice, accepted }) {
@@ -7,7 +7,7 @@ class transactionRepository {
             owner_id,
             product_id,
             requestedPrice,
-            accepted   
+            accepted
         });
 
         return createdTransaction;
@@ -40,6 +40,9 @@ class transactionRepository {
             include: [{
                 model: product,
                 attributes: ["picture", "name", "category", "price"]
+            }, {
+                model: user,
+                attributes: ["picture", "name", "town", "phone"]
             }]
         }
 
@@ -62,6 +65,9 @@ class transactionRepository {
             include: [{
                 model: product,
                 attributes: ["picture", "name", "category", "price"]
+            }, {
+                model: user,
+                attributes: ["picture", "name", "town", "phone"]
             }]
         }
 
