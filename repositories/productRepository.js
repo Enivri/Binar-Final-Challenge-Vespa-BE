@@ -18,7 +18,19 @@ class productRepository {
     }
 
     static async getProductById({ id }) {
-        const getProduct = await product.findOne({ where: { id } });
+        const query = {
+            where: {},
+            include: [{
+                model: user,
+                attributes: ["picture", "name", "town"]
+            }]
+        }
+
+        if (id) {
+            query.where = { ...query.where, id: id }
+        }
+
+        const getProduct = await product.findAll(query);
 
         return getProduct;
     }
