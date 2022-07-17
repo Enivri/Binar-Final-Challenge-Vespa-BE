@@ -1,4 +1,5 @@
 const productRepository = require("../repositories/productRepository");
+const usersRepository = require("../repositories/usersRepository");
 const cloudinary = require("../cloudinary/cloudinary");
 
 class productService {
@@ -125,74 +126,62 @@ class productService {
         try {
             const getProduct = await productRepository.getProductById({ id });
 
-            if (getProduct.user_id == user_id) {
+            let images = [];
 
-                let images = [];
-
-                if (picture.picture) {
-                    await Promise.all(picture.picture.map(async (img) => {
-                        const fileBase64 = img.buffer.toString("base64");
-                        const file = `data:${img.mimetype};base64,${fileBase64}`;
-                        const cloudinaryImage = await cloudinary.uploader.upload(file);
-                        images.push(cloudinaryImage.url);
-                    }))
-                } else {
-                    images = getProduct.picture
-                }
-
-                if(!name){
-                    name = getProduct.name
-                }
-
-                if(!price){
-                    price = getProduct.price
-                }
-
-                if(!category){
-                    category = getProduct.category
-                }
-
-                if(!description){
-                    description = getProduct.description
-                }
-
-                if(!sold){
-                    sold = getProduct.sold
-                }
-
-                if(!isPublished){
-                    isPublished = getProduct.isPublished
-                }
-
-                const updatedPost = await productRepository.updateProductById({
-                    id,
-                    name,
-                    price,
-                    category,
-                    description,
-                    picture: images,
-                    sold,
-                    isPublished
-                });
-
-                return {
-                    status: true,
-                    status_code: 200,
-                    message: "Product updated successfully",
-                    data: {
-                        updated_post: updatedPost,
-                    },
-                };
+            if (picture.picture) {
+                await Promise.all(picture.picture.map(async (img) => {
+                    const fileBase64 = img.buffer.toString("base64");
+                    const file = `data:${img.mimetype};base64,${fileBase64}`;
+                    const cloudinaryImage = await cloudinary.uploader.upload(file);
+                    images.push(cloudinaryImage.url);
+                }))
             } else {
-                return {
-                    status: true,
-                    status_code: 401,
-                    message: "Resource Unauthorized",
-                    data: {
-                        updated_post: null,
-                    },
-                };
+                images = getProduct.picture
             }
+
+            if (!name) {
+                name = getProduct.name
+            }
+
+            if (!price) {
+                price = getProduct.price
+            }
+
+            if (!category) {
+                category = getProduct.category
+            }
+
+            if (!description) {
+                description = getProduct.description
+            }
+
+            if (!sold) {
+                sold = getProduct.sold
+            }
+
+            if (!isPublished) {
+                isPublished = getProduct.isPublished
+            }
+
+            const updatedPost = await productRepository.updateProductById({
+                id,
+                name,
+                price,
+                category,
+                description,
+                picture: images,
+                sold,
+                isPublished
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Product updated successfully",
+                data: {
+                    updated_post: updatedPost,
+                },
+            };
         } catch (err) {
             return {
                 status: false,
