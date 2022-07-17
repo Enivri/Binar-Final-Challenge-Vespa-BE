@@ -1,7 +1,7 @@
 const transactionService = require("../services/transactionService");
 
 const createTransaction = async (req, res, next) => {
-    const { owner_id, product_id, requestedPrice, accepted } = req.body;
+    const { owner_id, product_id, requestedPrice, accepted, isOpen } = req.body;
 
     const user_id = req.user.id;
 
@@ -10,7 +10,8 @@ const createTransaction = async (req, res, next) => {
         owner_id,
         product_id,
         requestedPrice,
-        accepted
+        accepted,
+        isOpen
     });
     res.status(status_code).send({
         status: status,
@@ -21,7 +22,7 @@ const createTransaction = async (req, res, next) => {
 
 const updateTransactionById = async (req, res, next) => {
     const { id } = req.params;
-    const { owner_id, product_id, requestedPrice, accepted } = req.body;
+    const { owner_id, product_id, requestedPrice, accepted, isOpen } = req.body;
 
     const user_id = req.user.id;
 
@@ -31,7 +32,8 @@ const updateTransactionById = async (req, res, next) => {
         owner_id,
         product_id,
         requestedPrice,
-        accepted
+        accepted,
+        isOpen
     });
 
     res.status(status_code).send({
@@ -43,12 +45,13 @@ const updateTransactionById = async (req, res, next) => {
 
 const getTransactionByUserId = async (req, res, next) => {
     const { id } = req.params;
-    const { accepted } = req.query;
+    const { accepted, isOpen } = req.query;
 
     const { status, status_code, message, data } =
         await transactionService.getTransactionByUserId({
             id,
-            accepted
+            accepted,
+            isOpen
         });
 
     res.status(status_code).send({
@@ -60,12 +63,13 @@ const getTransactionByUserId = async (req, res, next) => {
 
 const getTransactionByOwnerId = async (req, res, next) => {
     const { id } = req.params;
-    const { accepted } = req.query;
+    const { accepted, isOpen } = req.query;
 
     const { status, status_code, message, data } =
         await transactionService.getTransactionByOwnerId({
             id,
-            accepted
+            accepted,
+            isOpen
         });
 
     res.status(status_code).send({
