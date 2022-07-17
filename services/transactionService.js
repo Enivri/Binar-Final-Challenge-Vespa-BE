@@ -1,7 +1,7 @@
 const transactionRepository = require("../repositories/transactionRepository");
 
 class transactionService {
-    static async create({ user_id, owner_id, product_id, requestedPrice, accepted }) {
+    static async create({ user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
         try {
             if (!owner_id) {
                 return {
@@ -36,12 +36,24 @@ class transactionService {
                 };
             }
 
+            if (!isOpen) {
+                return {
+                    status: false,
+                    status_code: 400,
+                    message: "isOpen harus diisi",
+                    data: {
+                        registered_user: null,
+                    },
+                };
+            }
+
             const createdTransaction = await transactionRepository.create({
                 user_id,
                 owner_id,
                 product_id,
                 requestedPrice,
-                accepted
+                accepted,
+                isOpen
             });
 
             return {
@@ -62,7 +74,7 @@ class transactionService {
         }
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted }) {
+    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
         try {
             const getTransaction = await transactionRepository.getTransactionById({ id });
 
@@ -73,7 +85,8 @@ class transactionService {
                     owner_id,
                     product_id,
                     requestedPrice,
-                    accepted
+                    accepted,
+                    isOpen
                 });
 
                 return {
@@ -104,11 +117,12 @@ class transactionService {
         }
     }
 
-    static async getTransactionByUserId({ id, accepted }) {
+    static async getTransactionByUserId({ id, accepted, isOpen }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByUserId({
                 id,
-                accepted
+                accepted,
+                isOpen
             });
 
             return {
@@ -129,11 +143,12 @@ class transactionService {
         }
     }
 
-    static async getTransactionByOwnerId({ id, accepted }) {
+    static async getTransactionByOwnerId({ id, accepted, isOpen }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByOwnerId({
                 id,
-                accepted
+                accepted,
+                isOpen
             });
 
             return {

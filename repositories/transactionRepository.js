@@ -1,13 +1,14 @@
 const { transaction, product, user } = require("../models");
 
 class transactionRepository {
-    static async create({ user_id, owner_id, product_id, requestedPrice, accepted }) {
+    static async create({ user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
         const createdTransaction = transaction.create({
             user_id,
             owner_id,
             product_id,
             requestedPrice,
-            accepted
+            accepted,
+            isOpen
         });
 
         return createdTransaction;
@@ -19,14 +20,15 @@ class transactionRepository {
         return getTransaction;
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted }) {
+    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
         const updatedTransaction = await transaction.update(
             {
                 user_id,
                 owner_id,
                 product_id,
                 requestedPrice,
-                accepted
+                accepted,
+                isOpen
             },
             { where: { id } }
         );
@@ -34,7 +36,7 @@ class transactionRepository {
         return updatedTransaction;
     }
 
-    static async getTransactionByUserId({ id, accepted }) {
+    static async getTransactionByUserId({ id, accepted, isOpen }) {
         const query = {
             where: {},
             include: [{
@@ -54,12 +56,16 @@ class transactionRepository {
             query.where = { ...query.where, accepted }
         }
 
+        if (isOpen) {
+            query.where = { ...query.where, isOpen }
+        }
+
         const getTransaction = await transaction.findAll(query);
 
         return getTransaction;
     }
 
-    static async getTransactionByOwnerId({ id, accepted }) {
+    static async getTransactionByOwnerId({ id, accepted, isOpen }) {
         const query = {
             where: {},
             include: [{
@@ -77,6 +83,10 @@ class transactionRepository {
 
         if (accepted) {
             query.where = { ...query.where, accepted }
+        }
+
+        if (isOpen) {
+            query.where = { ...query.where, isOpen }
         }
 
         const getTransaction = await transaction.findAll(query);
