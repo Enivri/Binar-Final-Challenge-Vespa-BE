@@ -1,4 +1,5 @@
 const transactionRepository = require("../repositories/transactionRepository");
+const productRepository = require("../repositories/productRepository");
 
 class transactionService {
     static async create({ user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
@@ -74,19 +75,20 @@ class transactionService {
         }
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
+    static async updateTransactionById({ id, user_id, requestedPrice, accepted, isOpen, sold }) {
         try {
             const getTransaction = await transactionRepository.getTransactionById({ id });
 
-            if (getTransaction.user_id == user_id) {
+            if (getTransaction.owner_id == user_id) {
                 const updatedTransaction = await transactionRepository.updateTransactionById({
                     id,
-                    user_id,
-                    owner_id,
-                    product_id,
                     requestedPrice,
                     accepted,
                     isOpen
+                });
+                const updatedProduct = await productRepository.updateProductById({
+                    id: getTransaction.product_id,
+                    sold
                 });
 
                 return {
@@ -95,6 +97,7 @@ class transactionService {
                     message: "Transaction updated successfully",
                     data: {
                         updated_post: updatedTransaction,
+                        updated_product: updatedProduct
                     },
                 };
             } else {
@@ -146,6 +149,34 @@ class transactionService {
     static async getTransactionByOwnerId({ id, accepted, isOpen }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByOwnerId({
+                id,
+                accepted,
+                isOpen
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success",
+                data: {
+                    posts: getTransaction,
+                },
+            };
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {
+                    registered_user: null,
+                },
+            };
+        }
+    }
+
+    static async getTransactionNotif({ id, accepted, isOpen }) {
+        try {
+            const getTransaction = await transactionRepository.getTransactionNotif({
                 id,
                 accepted,
                 isOpen

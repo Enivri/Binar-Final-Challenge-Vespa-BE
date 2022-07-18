@@ -1,4 +1,5 @@
 const { transaction, product, user } = require("../models");
+const Op = require('sequelize').Op;
 
 class transactionRepository {
     static async create({ user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
@@ -20,12 +21,10 @@ class transactionRepository {
         return getTransaction;
     }
 
-    static async updateTransactionById({ id, user_id, owner_id, product_id, requestedPrice, accepted, isOpen }) {
+    static async updateTransactionById({ id, requestedPrice, accepted, isOpen }) {
+        console.log(id, requestedPrice, accepted, isOpen)
         const updatedTransaction = await transaction.update(
             {
-                user_id,
-                owner_id,
-                product_id,
                 requestedPrice,
                 accepted,
                 isOpen
@@ -79,6 +78,38 @@ class transactionRepository {
 
         if (id) {
             query.where = { ...query.where, owner_id: id }
+        }
+
+        if (accepted) {
+            query.where = { ...query.where, accepted }
+        }
+
+        if (isOpen) {
+            query.where = { ...query.where, isOpen }
+        }
+
+        const getTransaction = await transaction.findAll(query);
+
+        return getTransaction;
+    }
+
+    static async getTransactionNotif({ id, accepted, isOpen }) {
+        const query = {
+            where: {},
+            include: [{
+                model: product,
+                attributes: ["picture", "name", "category", "price"]
+            }, {
+                model: user,
+                attributes: ["picture", "name", "town", "phone"]
+            }]
+        }
+
+        if (id) {
+            query.where = {
+                ...query.where,
+                [Op.or]: [{ owner_id: { [Op.eq]: id } }, { user_id: { [Op.eq]: id } }]
+            }
         }
 
         if (accepted) {

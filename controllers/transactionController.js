@@ -22,18 +22,16 @@ const createTransaction = async (req, res, next) => {
 
 const updateTransactionById = async (req, res, next) => {
     const { id } = req.params;
-    const { owner_id, product_id, requestedPrice, accepted, isOpen } = req.body;
-
+    const { requestedPrice, accepted, isOpen, sold } = req.body;
     const user_id = req.user.id;
 
     const { status, status_code, message, data } = await transactionService.updateTransactionById({
         id,
         user_id,
-        owner_id,
-        product_id,
         requestedPrice,
         accepted,
-        isOpen
+        isOpen,
+        sold
     });
 
     res.status(status_code).send({
@@ -79,4 +77,22 @@ const getTransactionByOwnerId = async (req, res, next) => {
     });
 };
 
-module.exports = { createTransaction, getTransactionByUserId, updateTransactionById, getTransactionByOwnerId };
+const getTransactionNotif = async (req, res, next) => {
+    const { id } = req.params;
+    const { accepted, isOpen } = req.query;
+
+    const { status, status_code, message, data } =
+        await transactionService.getTransactionNotif({
+            id,
+            accepted,
+            isOpen
+        });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
+module.exports = { createTransaction, getTransactionByUserId, updateTransactionById, getTransactionByOwnerId, getTransactionNotif };

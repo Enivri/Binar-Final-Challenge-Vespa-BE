@@ -2,52 +2,106 @@ const { user } = require("../models");
 
 class userRepository {
   static async getByEmail({ email }) {
-    const getUser = await user.findOne({ where: { email: email } });
+    try {
+      const getUser = await user.findOne({ where: { email: email } });
 
-    return getUser;
+      return getUser;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
   static async create({ name, email, password }) {
-    const createdUser = await user.create({
-      name,
-      email,
-      password
-    });
+    try {
+      const createdUser = await user.create({
+        name,
+        email,
+        password
+      });
 
-    return createdUser;
+      return createdUser;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
   static async updateUsers({ id, name, town, address, phone, picture }) {
-    const deleteUsers = await user.update(
-      {
-        name,
-        town,
-        address,
-        phone,
-        picture,
-      },
-      { where: { id } }
-    );
+    try {
+      const deleteUsers = await user.update(
+        {
+          name,
+          town,
+          address,
+          phone,
+          picture,
+        },
+        { where: { id } }
+      );
 
-    return deleteUsers;
+      return deleteUsers;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
   static async deleteUsers({ id }) {
-    const deleteUsers = await user.destroy({ where: { id } });
+    try {
+      const deleteUsers = await user.destroy({ where: { id } });
 
-    return deleteUsers;
+      return deleteUsers;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
   static async getUsersById({ id }) {
-    const getUsers = await user.findOne({ where: { id } });
+    try {
+      const getUsers = await user.findOne({ where: { id } });
 
-    return getUsers;
+      return getUsers;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
   static async getAllUsers({ }) {
-    const getAllUsers = await user.findAll({});
+    try {
+      const getAllUsers = await user.findAll({});
 
-    return getAllUsers;
+      return getAllUsers;
+    } catch (err) {
+      return {
+        status: false,
+        status_code: 500,
+        message: err.message,
+        data: {},
+      };
+    }
   }
 
 }

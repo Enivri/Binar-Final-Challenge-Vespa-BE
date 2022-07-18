@@ -43,6 +43,7 @@ app.delete("/v1/product/:id", middleware.authenticate, productController.deleteP
 // Transaction
 app.get("/v1/transaction/users/:id", middleware.authenticate, transactionController.getTransactionByUserId);
 app.get("/v1/transaction/owners/:id", middleware.authenticate, transactionController.getTransactionByOwnerId);
+app.get("/v1/transaction/notif/:id", middleware.authenticate, transactionController.getTransactionNotif);
 app.post("/v1/transaction", middleware.authenticate, transactionController.createTransaction);
 app.put("/v1/transaction/:id", middleware.authenticate, transactionController.updateTransactionById);
 
