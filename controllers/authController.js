@@ -159,27 +159,27 @@ const getCurrentUsers = async (req, res) => {
   }
 };
 
-// const loginGoogle = async (req, res) => {
-//   try {
-//     const { google_credential } = req.body;
+const loginGoogle = async (req, res) => {
+  try {
+    const { google_credential } = req.body;
 
-//     const { status, status_code, message, data } = await authService.loginGoogle({
-//       google_credential,
-//     });
+    const { status, status_code, message, data } = await authService.loginGoogle({
+      google_credential,
+    });
 
-//     res.status(status_code).send({
-//       status: status,
-//       message: message,
-//       data: data,
-//     });
-//   } catch (err) {
-//     return {
-//       status: false,
-//       status_code: 500,
-//       message: err.message,
-//       data: {},
-//     };
-//   }
-// };
+    res.status(status_code).send({
+      status: status,
+      message: message,
+      data: data,
+    });
+  } catch (err) {
+    return {
+      status: false,
+      status_code: 500,
+      message: err.message,
+      data: {},
+    };
+  }
+};
 
 module.exports = { register, login, getCurrentUsers, loginGoogle, updateUsers, deleteUsers, getUsersById, getAllUsers };
