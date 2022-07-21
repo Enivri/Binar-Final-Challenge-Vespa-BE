@@ -35,6 +35,35 @@ class transactionRepository {
         return updatedTransaction;
     }
 
+    static async getTransactionById({ id, accepted, isOpen }) {
+        const query = {
+            where: {},
+            include: [{
+                model: product,
+                attributes: ["picture", "name", "category", "price"]
+            }, {
+                model: user,
+                attributes: ["picture", "name", "town", "phone"]
+            }]
+        }
+
+        if (id) {
+            query.where = { ...query.where, id: id }
+        }
+
+        if (accepted) {
+            query.where = { ...query.where, accepted }
+        }
+
+        if (isOpen) {
+            query.where = { ...query.where, isOpen }
+        }
+
+        const getTransaction = await transaction.findAll(query);
+
+        return getTransaction;
+    }
+
     static async getTransactionByUserId({ id, accepted, isOpen }) {
         const query = {
             where: {},

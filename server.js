@@ -41,6 +41,7 @@ app.put("/v1/product/:id", middleware.authenticate, upload.fields([{ name: "pict
 app.delete("/v1/product/:id", middleware.authenticate, productController.deleteProductById);
 
 // Transaction
+app.get("/v1/transaction/:id", middleware.authenticate, transactionController.getTransactionById);
 app.get("/v1/transaction/users/:id", middleware.authenticate, transactionController.getTransactionByUserId);
 app.get("/v1/transaction/owners/:id", middleware.authenticate, transactionController.getTransactionByOwnerId);
 app.get("/v1/transaction/notif/:id", middleware.authenticate, transactionController.getTransactionNotif);

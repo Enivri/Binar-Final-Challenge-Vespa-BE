@@ -41,6 +41,24 @@ const updateTransactionById = async (req, res, next) => {
     });
 };
 
+const getTransactionById = async (req, res, next) => {
+    const { id } = req.params;
+    const { accepted, isOpen } = req.query;
+
+    const { status, status_code, message, data } =
+        await transactionService.getTransactionById({
+            id,
+            accepted,
+            isOpen
+        });
+
+    res.status(status_code).send({
+        status: status,
+        message: message,
+        data: data,
+    });
+};
+
 const getTransactionByUserId = async (req, res, next) => {
     const { id } = req.params;
     const { accepted, isOpen } = req.query;
@@ -95,4 +113,4 @@ const getTransactionNotif = async (req, res, next) => {
     });
 };
 
-module.exports = { createTransaction, getTransactionByUserId, updateTransactionById, getTransactionByOwnerId, getTransactionNotif };
+module.exports = { createTransaction, getTransactionByUserId, getTransactionById, updateTransactionById, getTransactionByOwnerId, getTransactionNotif };

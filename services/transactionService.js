@@ -120,6 +120,32 @@ class transactionService {
         }
     }
 
+    static async getTransactionById({ id, accepted, isOpen }) {
+        try {
+            const getTransaction = await transactionRepository.getTransactionById({
+                id,
+                accepted,
+                isOpen
+            });
+
+            return {
+                status: true,
+                status_code: 200,
+                message: "Success",
+                data: {
+                    posts: getTransaction,
+                },
+            };
+        } catch (err) {
+            return {
+                status: false,
+                status_code: 500,
+                message: err.message,
+                data: {},
+            };
+        }
+    }
+
     static async getTransactionByUserId({ id, accepted, isOpen }) {
         try {
             const getTransaction = await transactionRepository.getTransactionByUserId({
