@@ -77,8 +77,11 @@ class transactionService {
 
     static async updateTransactionById({ id, user_id, requestedPrice, accepted, isOpen, sold }) {
         try {
-            const getTransaction = await transactionRepository.getTransactionById({ id });
 
+            const getTransaction = await transactionRepository.getTransactionById({ id });
+            console.log(user_id)
+            console.log(getTransaction.owner_id)
+            console.log(id)
             if (getTransaction.owner_id == user_id) {
                 const updatedTransaction = await transactionRepository.updateTransactionById({
                     id,
@@ -120,12 +123,10 @@ class transactionService {
         }
     }
 
-    static async getTransactionById({ id, accepted, isOpen }) {
+    static async getTransactionById({ id }) {
         try {
             const getTransaction = await transactionRepository.getTransactionById({
-                id,
-                accepted,
-                isOpen
+                id
             });
 
             return {

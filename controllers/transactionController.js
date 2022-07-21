@@ -43,13 +43,10 @@ const updateTransactionById = async (req, res, next) => {
 
 const getTransactionById = async (req, res, next) => {
     const { id } = req.params;
-    const { accepted, isOpen } = req.query;
 
     const { status, status_code, message, data } =
         await transactionService.getTransactionById({
-            id,
-            accepted,
-            isOpen
+            id
         });
 
     res.status(status_code).send({
