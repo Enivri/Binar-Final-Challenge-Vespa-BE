@@ -16,7 +16,16 @@ class transactionRepository {
     }
 
     static async getTransactionById({ id }) {
-        const getTransaction = await transaction.findOne({ where: { id } });
+        const getTransaction = await transaction.findOne({
+            where: { id },
+            include: [{
+                model: product,
+                attributes: ["picture", "name", "category", "price"]
+            }, {
+                model: user,
+                attributes: ["picture", "name", "town", "phone"]
+            }]
+        });
 
         return getTransaction;
     }
