@@ -2,6 +2,11 @@ require("dotenv").config();
 
 module.exports = {
   development: {
+    // username: "postgres",
+    // password: "irvine123",
+    // database: "Final_Challenge",
+    // host: "127.0.0.1",
+    // dialect: "postgres",
     username: "wuicilrtrjxcte",
     password: "8dab27229eaba68befb4b810c78c92b309dd0d39f4ce8af4c5f6091e4959b3cb",
     database: "d95qhsbvcghl4e",
@@ -22,6 +27,11 @@ module.exports = {
     dialect: "postgres",
   },
   production: {
+    // username: "postgres",
+    // password: "irvine123",
+    // database: "Final_Challenge",
+    // host: "127.0.0.1",
+    // dialect: "postgres",
     username: "wuicilrtrjxcte",
     password: "8dab27229eaba68befb4b810c78c92b309dd0d39f4ce8af4c5f6091e4959b3cb",
     database: "d95qhsbvcghl4e",
