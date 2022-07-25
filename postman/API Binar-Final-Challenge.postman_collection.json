@@ -1,0 +1,1001 @@
+{
+	"info": {
+		"_postman_id": "647f876a-598e-4143-a6a6-8537a9001d81",
+		"name": "API Binar-Final-Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20465262"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlckFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY1MjM1Nzk1OCwiZXhwIjoxNjUyNDQ0MzU4fQ.-dA_MsnaTxhQc536AG67AoJiZv8ZEq2l853Z7YFp4UE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "testing2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testing2@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "testing123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testing1@gmail.com\",\r\n    \"password\": \"testing123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0ZXN0aW5nNEBnbWFpbC5jb20iLCJpYXQiOjE2NTY2ODE4NDMsImV4cCI6MTY1Njc2ODI0M30.AxbgwiTlbdywLS23RoAuIyFYEly-ZF6wMWvciTGJA04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get current user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJ0ZXN0aW5nMkBnbWFpbC5jb20iLCJpYXQiOjE2NTg0MTE0ODQsImV4cCI6MTY1ODQ5Nzg4NH0.FeAUj9aQWJ4K7zyS67kyX5yYLoMOKZHynCWC3dg1dMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTU5MDg0MDUsImV4cCI6MTY1NTk5NDgwNX0.-1-7eJPTX5Afr6YOB8SJEzFzkysEc4MW38VOP5ct3mk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/users/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJ0ZXN0aW5nNEBnbWFpbC5jb20iLCJpYXQiOjE2NTY2ODE4NDMsImV4cCI6MTY1Njc2ODI0M30.AxbgwiTlbdywLS23RoAuIyFYEly-ZF6wMWvciTGJA04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTc4MDkyMjgsImV4cCI6MTY1Nzg5NTYyOH0.a_mEk4svvLD2xt11azH0F7wY-gcn5u7v761jtjQF5Hg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "testing1",
+									"type": "text"
+								},
+								{
+									"key": "town",
+									"value": "jakarta",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "jln raya",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "081123456",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/superadmin.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "create product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJ0ZXN0aW5nMkBnbWFpbC5jb20iLCJpYXQiOjE2NTgxNDg4NzgsImV4cCI6MTY1ODIzNTI3OH0.wPueI4xWx6Gh0TBTsx_mAw6FP5sKL2uD8XbKL5-aaUY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "jam tangan 3",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "12000000",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Hobi",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/jam 2.jpg"
+								},
+								{
+									"key": "sold",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "isPublished",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTgwMjIzMjAsImV4cCI6MTY1ODEwODcyMH0.yABXePMdIj12UtI0EsbhSuyUL0Co5NAArxoDxhj_Cqc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "jam tangan testing update",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "1500000",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "hobi",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "condisi 9.5/10 mulus",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/jam 1.jpg",
+									"disabled": true
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "sold",
+									"value": "false",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "isPublished",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by user id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTc5ODkxNDAsImV4cCI6MTY1ODA3NTU0MH0.jBkUNZqLGoHtzV-CGK0HZuYmVq6qO20wSKVKIpvxIfo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product",
+								"users",
+								"4"
+							],
+							"query": [
+								{
+									"key": "sold",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "isPublished",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTg0OTUzNjgsImV4cCI6MTY1ODU4MTc2OH0.pOPW70p7nN35A9OXDhGoZcSeka3Z3PuI7Sz5XyD0hlo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTU5MDg0MDUsImV4cCI6MTY1NTk5NDgwNX0.-1-7eJPTX5Afr6YOB8SJEzFzkysEc4MW38VOP5ct3mk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product/all?isPublished=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product",
+								"all"
+							],
+							"query": [
+								{
+									"key": "sold",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "hobi",
+									"disabled": true
+								},
+								{
+									"key": "isPublished",
+									"value": "true"
+								},
+								{
+									"key": "name",
+									"value": "update",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nM0BnbWFpbC5jb20iLCJpYXQiOjE2NTY2ODE5MjksImV4cCI6MTY1Njc2ODMyOX0.-uHzJ3w8UHMAs-jab1YdlXoypnBfIETL-L21rSBOXmw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/product/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"product",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "create transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTg0MDg1NTcsImV4cCI6MTY1ODQ5NDk1N30.nPd3cwS5EdtUltvet16oKbzqgDWZ_driHIbDm7U0S7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"owner_id\": \"5\",\r\n    \"product_id\": \"13\",\r\n    \"requestedPrice\": \"345678\",\r\n    \"accepted\": \"pending\",\r\n    \"isOpen\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update transaction by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJ0ZXN0aW5nMkBnbWFpbC5jb20iLCJpYXQiOjE2NTg0MTE0ODQsImV4cCI6MTY1ODQ5Nzg4NH0.FeAUj9aQWJ4K7zyS67kyX5yYLoMOKZHynCWC3dg1dMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"requestedPrice\": \"10000\",\r\n    \"accepted\": \"waiting\",\r\n    \"isOpen\": true,\r\n    \"sold\": false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction/20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction by user id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTc4OTQ4ODYsImV4cCI6MTY1Nzk4MTI4Nn0.kkSFyUGX7KLTcn_E-Cy3cfim0m212pmqYfmZo9tFsco",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accepted",
+									"value": "pending",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction",
+								"users",
+								"1"
+							],
+							"query": [
+								{
+									"key": "accepted",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "rejected",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction by owner id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXN0aW5nMkBnbWFpbC5jb20iLCJpYXQiOjE2NTc4MDk3NTYsImV4cCI6MTY1Nzg5NjE1Nn0.yMPfL3AQu4LW8gFagIoVc_XnBMGeWetnpbDkWMCduRw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction/owners/1?accepted=pending&accepted=waiting",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction",
+								"owners",
+								"1"
+							],
+							"query": [
+								{
+									"key": "accepted",
+									"value": "pending"
+								},
+								{
+									"key": "accepted",
+									"value": "waiting"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTg0MDg1NTcsImV4cCI6MTY1ODQ5NDk1N30.nPd3cwS5EdtUltvet16oKbzqgDWZ_driHIbDm7U0S7w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accepted",
+									"value": "pending",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction",
+								"19"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "accepted",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transaction Notif",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0ZXN0aW5nMUBnbWFpbC5jb20iLCJpYXQiOjE2NTg0OTUzNjgsImV4cCI6MTY1ODU4MTc2OH0.pOPW70p7nN35A9OXDhGoZcSeka3Z3PuI7Sz5XyD0hlo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "accepted",
+									"value": "pending",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:2000/v1/transaction/notif/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"v1",
+								"transaction",
+								"notif",
+								"3"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "accepted",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
